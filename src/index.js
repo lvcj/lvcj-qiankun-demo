@@ -19,33 +19,23 @@ registerMicroApps(
     [
       {
         name: 'react16',
-        entry: '//localhost:8088/',
+        entry: 'http://localhost:8088/',
         container: '#subapp-viewport',
         render,
         activeRule: '/about-react',
       }
     ],
     {
-      beforeLoad: [
-        app => {
-          console.log('[LifeCycle] before load %c%s', 'color: green;', app.name);
-        },
-      ],
-      beforeMount: [
-        app => {
-          console.log('[LifeCycle] before mount %c%s', 'color: green;', app.name);
-        },
-      ],
-      afterUnmount: [
-        app => {
-          console.log('[LifeCycle] after unmount %c%s', 'color: green;', app.name);
-        },
-      ],
+      beforeLoad: async (app) => console.log('[LifeCycle] before load %c%s', 'color: green;', app.name),
+      beforeMount: async (app) => console.log('[LifeCycle] before mount %c%s', 'color: green;', app.name),
+      beforeUnmount: async (app) => console.log('[LifeCycle] before unmount %c%s', 'color: green;', app.name),
+      afterMount: async (app) => console.log('[LifeCycle] after mount %c%s', 'color: green;', app.name),
+      afterUnmount: async (app) => console.log('[LifeCycle] after unmount %c%s', 'color: green;', app.name),
     },
   );
 
   const { onGlobalStateChange, setGlobalState } = initGlobalState({
-    user: 'qiankun',
+    user: 'masters',
   });
   
   onGlobalStateChange((value, prev) => console.log('[onGlobalStateChange - master]:', value, prev));
